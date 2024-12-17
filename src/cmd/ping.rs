@@ -8,7 +8,7 @@ pub struct Ping {
 }
 
 impl Ping {
-    fn new(msg: Option<Bytes>) -> Self {
+    pub fn new(msg: Option<Bytes>) -> Self {
         Ping { msg }
     }
 

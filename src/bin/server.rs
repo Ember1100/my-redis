@@ -7,7 +7,7 @@ use tokio::net::{TcpListener, TcpStream};
 use tokio::task::yield_now;
 
 type Db = Arc<Mutex<HashMap<String, Bytes>>>;
-type ShardedDb = Arc<Vec<Mutex<HashMap<String, Vec<u8>>>>>;
+type ShardedDb =Arc<Vec<Mutex<HashMap<String, Vec<u8>>>>>;
 
 #[tokio::main]
 async fn main() {
