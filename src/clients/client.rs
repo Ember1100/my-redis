@@ -158,7 +158,7 @@ impl Client {
 }
 
 impl Subscriber {
-    pub fn get_subscribed(&mut self) -> &[String] {
+    pub fn get_subscribed(&self) -> &[String] {
         &self.subscribed_channels
     }
 
