@@ -18,8 +18,11 @@ pub struct BlockingSubscriber {
 }
 
 struct SubscriberIterator {
+    /// The asynchronous `Subscriber`.
     inner: crate::clients::Subscriber,
 
+    /// A `current_thread` runtime for executing operations on the asynchronous
+    /// `Subscriber` in a blocking manner.
     rt: Runtime,
 }
 
@@ -72,6 +75,13 @@ impl BlockingSubscriber {
 
     pub fn next_message(&mut self) -> crate::Result<Option<Message>> {
         self.rt.block_on(self.inner.next_message())
+    }
+
+    pub fn into_iter(self) -> impl Iterator<Item = crate::Result<Message>> {
+        SubscriberIterator {
+            inner: self.inner,
+            rt: self.rt,
+        }
     }
 
     pub fn subscribe(&mut self, channels: &[String]) -> crate::Result<()> {

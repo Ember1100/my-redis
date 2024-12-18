@@ -92,9 +92,20 @@ impl Db {
             when
         });
 
-        let prev = state
-            .entries
-            .insert(key.clone(), Entry { data, expires_at });
+        let prev = state.entries.insert(
+            key.clone(),
+            Entry {
+                data: value,
+                expires_at,
+            },
+        );
+
+        if let Some(prev) = prev {
+            if let Some(when) = prev.expires_at {
+                // clear expiration
+                state.expirations.remove(&(when, key.clone()));
+            }
+        }
 
         if let Some(when) = expires_at {
             state.expirations.insert((when, key));

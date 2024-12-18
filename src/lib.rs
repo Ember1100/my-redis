@@ -1,5 +1,5 @@
-
 pub mod clients;
+pub use clients::{BlockingClient, BufferedClient, Client};
 pub mod cmd;
 pub use cmd::Command;
 
@@ -14,7 +14,7 @@ pub mod frame;
 pub use frame::Frame;
 
 mod parse;
-use parse::{Parse,ParseError};
+use parse::{Parse, ParseError};
 
 pub mod server;
 

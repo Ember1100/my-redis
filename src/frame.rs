@@ -223,7 +223,7 @@ fn get_line<'a>(src: &mut Cursor<&'a [u8]>) -> Result<&'a [u8], Error> {
     Err(Error::Incomplete)
 }
 
-impl From<&str> for Frame {
+impl From<String> for Error {
     fn from(src: String) -> Error {
         Error::Other(src.into())
     }
